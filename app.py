@@ -34,6 +34,9 @@ def hello() -> str:
     return "Hello, World!"
 
 
+
+
+
 def shutdown_handler(signal_int: int, frame: FrameType) -> None:
     logger.info(f"Caught Signal {signal.strsignal(signal_int)}")
 
