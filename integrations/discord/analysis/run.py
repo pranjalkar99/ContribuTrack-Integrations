@@ -9,19 +9,39 @@ from langchain.chains import LLMChain
 from langchain.agents import initialize_agent, Tool, AgentType
 from dotenv import load_dotenv
 from langchain_core.output_parsers import StrOutputParser
+from langchain_ollama.chat_models import ChatOllama
 
 load_dotenv()
 
 # Set up OpenAI API Key
 openai_api_key = os.environ.get("OPENAI_API_KEY")
 
+# Use Local LLM , if data is sensitive
+
+if os.environ.get("USE_LOCAL_LLM") == "True":
+
+    if os.environ.get("OLLAMA_SETUP_DONE") == "True":
+        llm = ChatOllama(
+            model="llama3.2",
+            temperature=0,
+            # other params...
+        )
+    else:
+        ## run the private_data.sh and then set the OLLAMA_SETUP_DONE to True
+
+        raise Exception("Please run the private_data.sh script to set up the local LLM.")
+
+        ## write code to run the bash script 
+        
+
+else:
 # Initialize the language model
-llm = ChatOpenAI(
+    llm = ChatOpenAI(
     model="gpt-4",
     temperature=0,
     max_tokens=1000,
     timeout=None,
-)
+    )
 
 template = """
 system: You are a helpful assistant that summarizes conversations and extracts useful information.

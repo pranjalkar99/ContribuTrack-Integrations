@@ -21,7 +21,7 @@ __pycache__/
 # Exclude local IDE settings
 .idea/
 .vscode/
-
+.env
 # Exclude testing cache
 .pytest_cache/
 
