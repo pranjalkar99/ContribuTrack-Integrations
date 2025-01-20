@@ -8,3 +8,8 @@ google-auth==2.3.2
 
 discord.py
 python-dotenv
+aiosqlite
+psycopg2 
+langchain
+langchain_community
+langchain_openai

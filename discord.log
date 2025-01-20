@@ -1,0 +1,174 @@
+[2025-01-20 08:25:04] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2025-01-20 08:25:27] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2025-01-20 08:25:27] [INFO    ] discord.client: logging in using static token
+[2025-01-20 08:25:28] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 58f74fa0707b0804924f364e41a93baf).
+[2025-01-20 08:27:55] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2025-01-20 08:27:55] [INFO    ] discord.client: logging in using static token
+[2025-01-20 08:27:57] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: c9c80ee45ee490719ca4c5a65f520fc0).
+[2025-01-20 08:38:35] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2025-01-20 08:38:35] [INFO    ] discord.client: logging in using static token
+[2025-01-20 08:39:33] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2025-01-20 08:39:33] [INFO    ] discord.client: logging in using static token
+[2025-01-20 08:39:35] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 94f31468c34e348e138be1eb4e65489c).
+[2025-01-20 08:39:37] [ERROR   ] discord.client: Ignoring exception in on_ready
+Traceback (most recent call last):
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/discord/client.py", line 449, in _run_event
+    await coro(*args, **kwargs)
+  File "/workspaces/ContribuTrack-Integrations/integrations/discord/connect.py", line 45, in on_ready
+    self.conn = psycopg2.connect(**self.db_config)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: could not connect to server: Connection refused
+	Is the server running on host "localhost" (::1) and accepting
+	TCP/IP connections on port 5432?
+could not connect to server: Connection refused
+	Is the server running on host "localhost" (127.0.0.1) and accepting
+	TCP/IP connections on port 5432?
+
+[2025-01-20 08:42:56] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2025-01-20 08:42:56] [INFO    ] discord.client: logging in using static token
+[2025-01-20 08:42:58] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 4ced257f820f802c6c3466e5347c1319).
+[2025-01-20 08:44:06] [ERROR   ] discord.client: Ignoring exception in on_message
+Traceback (most recent call last):
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/discord/client.py", line 449, in _run_event
+    await coro(*args, **kwargs)
+  File "/workspaces/ContribuTrack-Integrations/integrations/discord/connect.py", line 96, in on_message
+    customer_id = await self.get_customer_id(message.guild.id)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/ContribuTrack-Integrations/integrations/discord/connect.py", line 116, in get_customer_id
+    customer_id = await self.cursor.lastrowid
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: object int can't be used in 'await' expression
+[2025-01-20 08:48:50] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2025-01-20 08:48:50] [INFO    ] discord.client: logging in using static token
+[2025-01-20 08:48:52] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 9d2b1264d673510c4bd09abb0970e76e).
+[2025-01-20 08:54:30] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2025-01-20 08:54:30] [INFO    ] discord.client: logging in using static token
+[2025-01-20 08:54:32] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: ed8647339a0086048e24a7f6dd52c284).
+[2025-01-20 08:57:03] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2025-01-20 08:57:03] [INFO    ] discord.client: logging in using static token
+[2025-01-20 08:57:05] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 185d8213e8c512e4fe686af71512b021).
+[2025-01-20 08:57:13] [ERROR   ] discord.client: Ignoring exception in on_message
+Traceback (most recent call last):
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/discord/client.py", line 449, in _run_event
+    await coro(*args, **kwargs)
+  File "/workspaces/ContribuTrack-Integrations/integrations/discord/save.py", line 96, in on_message
+    customer_id = await self.get_customer_id(message.guild.id)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/ContribuTrack-Integrations/integrations/discord/save.py", line 118, in get_customer_id
+    customer_id = await self.cursor.lastrowid
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: object int can't be used in 'await' expression
+[2025-01-20 08:58:17] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2025-01-20 08:58:17] [INFO    ] discord.client: logging in using static token
+[2025-01-20 08:58:19] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 0390b96e0a83cc59fa01e4e2d06f9379).
+[2025-01-20 09:07:44] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2025-01-20 09:07:44] [INFO    ] discord.client: logging in using static token
+[2025-01-20 09:07:46] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: eabe1f3c316095e4d7e25871d591012a).
+[2025-01-20 09:07:56] [ERROR   ] discord.client: Ignoring exception in on_message
+Traceback (most recent call last):
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/discord/client.py", line 449, in _run_event
+    await coro(*args, **kwargs)
+  File "/workspaces/ContribuTrack-Integrations/integrations/discord/save.py", line 96, in on_message
+    # Identify the server (e.g., by environment or config)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/ContribuTrack-Integrations/integrations/discord/save.py", line 111, in get_customer_id
+    # Placeholder logic; in a real app, map Discord guild IDs to servers
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/aiosqlite/cursor.py", line 48, in execute
+    await self._execute(self._cursor.execute, sql, parameters)
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/aiosqlite/cursor.py", line 40, in _execute
+    return await self._conn._execute(fn, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/aiosqlite/core.py", line 132, in _execute
+    return await future
+           ^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/aiosqlite/core.py", line 115, in run
+    result = function()
+             ^^^^^^^^^^
+sqlite3.OperationalError: no such table: customers
+[2025-01-20 09:08:09] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2025-01-20 09:08:09] [INFO    ] discord.client: logging in using static token
+[2025-01-20 09:08:11] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 4a3d0137deb080715b22f3f605161c2e).
+[2025-01-20 09:21:19] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2025-01-20 09:21:19] [INFO    ] discord.client: logging in using static token
+[2025-01-20 09:21:20] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 7652acad1cc02dfd49382ae4e8032fd7).
+[2025-01-20 09:28:45] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2025-01-20 09:28:45] [INFO    ] discord.client: logging in using static token
+[2025-01-20 09:28:46] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: c897f529b0a2349558daddce39492fc4).
+[2025-01-20 09:29:50] [ERROR   ] discord.client: Ignoring exception in on_message
+Traceback (most recent call last):
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/discord/client.py", line 449, in _run_event
+    await coro(*args, **kwargs)
+  File "/workspaces/ContribuTrack-Integrations/integrations/discord/save.py", line 130, in on_message
+    await self.store_attachment(message_id, attachment)
+  File "/workspaces/ContribuTrack-Integrations/integrations/discord/save.py", line 157, in store_attachment
+    attachment.title
+AttributeError: 'Attachment' object has no attribute 'title'
+[2025-01-20 09:33:49] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2025-01-20 09:33:49] [INFO    ] discord.client: logging in using static token
+[2025-01-20 09:33:50] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: c0233d4d2393f5571e33911d15148051).
+[2025-01-20 09:34:11] [ERROR   ] discord.client: Ignoring exception in on_message
+Traceback (most recent call last):
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/discord/client.py", line 449, in _run_event
+    await coro(*args, **kwargs)
+  File "/workspaces/ContribuTrack-Integrations/integrations/discord/save.py", line 129, in on_message
+    await self.store_attachment(message_id, attachment)
+  File "/workspaces/ContribuTrack-Integrations/integrations/discord/save.py", line 139, in store_attachment
+    await self.cursor.execute(
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/aiosqlite/cursor.py", line 48, in execute
+    await self._execute(self._cursor.execute, sql, parameters)
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/aiosqlite/cursor.py", line 40, in _execute
+    return await self._conn._execute(fn, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/aiosqlite/core.py", line 132, in _execute
+    return await future
+           ^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/aiosqlite/core.py", line 115, in run
+    result = function()
+             ^^^^^^^^^^
+sqlite3.ProgrammingError: Error binding parameter 1: type 'coroutine' is not supported
+[2025-01-20 09:38:03] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2025-01-20 09:38:03] [INFO    ] discord.client: logging in using static token
+[2025-01-20 09:38:04] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 10048666ed22636a5b903c968920a8a0).
+[2025-01-20 09:39:22] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2025-01-20 09:39:22] [INFO    ] discord.client: logging in using static token
+[2025-01-20 09:39:24] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 3867186b08765c7066f3f0dfab8f653c).
+[2025-01-20 09:39:54] [ERROR   ] discord.client: Ignoring exception in on_message
+Traceback (most recent call last):
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/discord/client.py", line 449, in _run_event
+    await coro(*args, **kwargs)
+  File "/workspaces/ContribuTrack-Integrations/integrations/discord/save.py", line 129, in on_message
+    await self.store_attachment(message_id, attachment.attachment_id, attachment.filename, attachment.url, attachment.content_type, attachment.size, attachment.height, attachment.width, attachment.description, attachment.ephemeral, attachment.duration)
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Attachment' object has no attribute 'attachment_id'
+[2025-01-20 09:43:05] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2025-01-20 09:43:05] [INFO    ] discord.client: logging in using static token
+[2025-01-20 09:43:07] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 88d3915627e4d572a4e60a4110a3e017).
+[2025-01-20 09:43:10] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2025-01-20 09:43:10] [INFO    ] discord.client: logging in using static token
+[2025-01-20 09:43:13] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: b981999d605a456e476985855405c50a).
+[2025-01-20 09:43:23] [ERROR   ] discord.client: Ignoring exception in on_message
+Traceback (most recent call last):
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/discord/client.py", line 449, in _run_event
+    await coro(*args, **kwargs)
+  File "/workspaces/ContribuTrack-Integrations/integrations/discord/save.py", line 129, in on_message
+    await self.store_attachment(message_id, attachment.id, attachment.filename, attachment.url, attachment.content_type, attachment.size, attachment.height, attachment.width, attachment.description, attachment.ephemeral, attachment.duration)
+  File "/workspaces/ContribuTrack-Integrations/integrations/discord/save.py", line 139, in store_attachment
+    await self.cursor.execute(
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/aiosqlite/cursor.py", line 48, in execute
+    await self._execute(self._cursor.execute, sql, parameters)
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/aiosqlite/cursor.py", line 40, in _execute
+    return await self._conn._execute(fn, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/aiosqlite/core.py", line 132, in _execute
+    return await future
+           ^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/aiosqlite/core.py", line 115, in run
+    result = function()
+             ^^^^^^^^^^
+sqlite3.IntegrityError: NOT NULL constraint failed: attachments.message_id
+[2025-01-20 09:45:16] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2025-01-20 09:45:16] [INFO    ] discord.client: logging in using static token
+[2025-01-20 09:45:18] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: beef24e101e60bffed6bb994f2d41790).
