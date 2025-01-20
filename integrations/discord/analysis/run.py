@@ -1,11 +1,14 @@
 import os
 import aiosqlite
 import asyncio
+from datetime import datetime
+from pprint import pprint
 from langchain.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
 from langchain.chains import LLMChain
 from langchain.agents import initialize_agent, Tool, AgentType
 from dotenv import load_dotenv
+from langchain_core.output_parsers import StrOutputParser
 
 load_dotenv()
 
@@ -19,43 +22,32 @@ llm = ChatOpenAI(
     max_tokens=1000,
     timeout=None,
 )
-from langchain.chains import ConversationChain
-from langchain.memory import ConversationBufferMemory
-from langchain_core.prompts import ChatPromptTemplate
-from langchain_openai import ChatOpenAI
 
-template = ChatPromptTemplate([
-    ("system", "You are a helpful assistant that summarizes conversations and extracts useful information."),
-    ("human", """
-    You have the following messages from a Discord channel:
+template = """
+system: You are a helpful assistant that summarizes conversations and extracts useful information.
+human: 
+You have the following messages from a Discord channel:
 
-    {messages}
+{messages}
 
-    Your task:
-    1. Summarize the conversation, highlighting important topics and messages.
-    2. Extract key insights such as sentiment, trends, and any interesting observations.
-    3. Suggest possible actions based on the conversation, like follow-ups, actions for the team, or key decisions to make.
+Your task:
+1. Summarize the conversation, highlighting important topics and messages.
+2. Extract key insights such as sentiment, trends, and any interesting observations.
+3. Suggest possible actions based on the conversation, like follow-ups, actions for the team, or key decisions to make.
 
-    Provide your output in a structured format:
-    - **Summary**: A brief summary of the conversation.
-    - **Insights**: Key insights, such as trends, user sentiment, or important messages.
-    - **Actions**: Suggested actions for the team or relevant stakeholders.
-    """)
-])
+Provide your output in a structured format:
+- **Summary**: A brief summary of the conversation.
+- **Insights**: Key insights, such as trends, user sentiment, or important messages.
+- **Actions**: Suggested actions for the team or relevant stakeholders.
+"""
 
 prompt = ChatPromptTemplate.from_template(template)
 
-memory = ConversationBufferMemory()
-
-chain = ConversationChain(
-    llm=llm,
-    memory=memory,
-    prompt=prompt,
-)
+chain = prompt | llm | StrOutputParser()
 
 async def get_messages_in_time_range(start_date: str, end_date: str, channel_id: int):
-    start_timestamp = datetime.strptime(start_date, '%Y-%m-%d')
-    end_timestamp = datetime.strptime(end_date, '%Y-%m-%d')
+    start_timestamp = datetime.strptime(start_date, '%Y-%m-%d %H:%M:%S')
+    end_timestamp = datetime.strptime(end_date, '%Y-%m-%d %H:%M:%S')
 
     query = """
         SELECT m.content, m.timestamp, u.name
@@ -72,9 +64,9 @@ async def get_messages_in_time_range(start_date: str, end_date: str, channel_id:
 
     return result
 
+async def main():
+    messages = await get_messages_in_time_range(start_date="2025-01-20 09:39:32", end_date="2025-01-20 12:39:32", channel_id=1)
+    print(messages)
+    pprint(chain.invoke({"messages": messages}))
 
-
-
-chain({"input": "I'm Bob, how are you?"})
-
-
+asyncio.run(main())
