@@ -14,3 +14,10 @@ langchain
 langchain_community
 langchain_openai
 langchain-ollama
+flake8
+black
+isort
+pygithub
+langgraph
+PyJWT
+cryptography
