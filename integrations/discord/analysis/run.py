@@ -1,4 +1,4 @@
-import os
+import os,json
 import aiosqlite
 import asyncio
 from datetime import datetime
@@ -10,6 +10,9 @@ from langchain.agents import initialize_agent, Tool, AgentType
 from dotenv import load_dotenv
 from langchain_core.output_parsers import StrOutputParser
 from langchain_ollama.chat_models import ChatOllama
+
+
+from integrations.jira.utils import create_jira_issue
 
 load_dotenv()
 
@@ -51,14 +54,27 @@ You have the following messages from a Discord channel:
 {messages}
 
 Your task:
-1. Summarize the conversation, highlighting important topics and messages.
-2. Extract key insights such as sentiment, trends, and any interesting observations.
-3. Suggest possible actions based on the conversation, like follow-ups, actions for the team, or key decisions to make.
+1. Summarize the conversation.
+2. Extract key insights such as sentiment, trends, and observations.
+3. Detect actionable tasks. For each task, include:
+   - **Task Summary**
+   - **Detailed Description**
+   - **Priority** (High, Medium, Low)
+   - **Due Date** (if applicable)
 
-Provide your output in a structured format:
-- **Summary**: A brief summary of the conversation.
-- **Insights**: Key insights, such as trends, user sentiment, or important messages.
-- **Actions**: Suggested actions for the team or relevant stakeholders.
+Respond in JSON format:
+{{
+  "summary": "...",
+  "insights": "...",
+  "actions": [
+    {{
+      "summary": "...",
+      "description": "...",
+      "priority": "...",
+      "due_date": "..." 
+    }}
+  ]
+}}
 """
 
 prompt = ChatPromptTemplate.from_template(template)
@@ -85,8 +101,21 @@ async def get_messages_in_time_range(start_date: str, end_date: str, channel_id:
     return result
 
 async def main():
-    messages = await get_messages_in_time_range(start_date="2025-01-20 09:39:32", end_date="2025-01-20 12:39:32", channel_id=1)
-    print(messages)
-    pprint(chain.invoke({"messages": messages}))
+    messages = await get_messages_in_time_range(
+        start_date="2025-01-20 09:39:32",
+        end_date="2025-02-02 12:39:32",
+        channel_id=1
+    )
+
+    output = chain.invoke({"messages": messages})
+    pprint(output)
+
+    output = json.loads(output)
+
+    # Automatically create tasks if actions are detected
+    actions = output.get("actions", [])
+    for task in actions:
+        pprint(task)
+        create_jira_issue(task)
 
 asyncio.run(main())
