@@ -1,16 +1,16 @@
-import requests,os,json
-from requests.auth import HTTPBasicAuth
+import json
+import os
 
+import requests
 from dotenv import load_dotenv
-
+from requests.auth import HTTPBasicAuth
 
 load_dotenv()
 
 
-
 JIRA_BASE_URL = os.getenv("JIRA_BASE_URL")
 API_ENDPOINT = f"{JIRA_BASE_URL}/rest/api/3/issue"
-EMAIL = os.getenv('JIRA_API_EMAIL')
+EMAIL = os.getenv("JIRA_API_EMAIL")
 API_TOKEN = os.getenv("JIRA_API_TOKEN")
 JIRA_PROJECT = os.getenv("JIRA_PROJECT")
 
@@ -26,14 +26,9 @@ def create_jira_issue(task):
                 "content": [
                     {
                         "type": "paragraph",
-                        "content": [
-                            {
-                                "type": "text",
-                                "text": task["description"]
-                            }
-                        ]
+                        "content": [{"type": "text", "text": task["description"]}],
                     }
-                ]
+                ],
             },
             "issuetype": {"name": "Task"},
             # "priority": {"name": task.get("priority", "Medium")},
@@ -45,7 +40,7 @@ def create_jira_issue(task):
         API_ENDPOINT,
         data=json.dumps(issue_data),
         headers={"Content-Type": "application/json"},
-        auth=HTTPBasicAuth(EMAIL, API_TOKEN)
+        auth=HTTPBasicAuth(EMAIL, API_TOKEN),
     )
 
     if response.status_code == 201:
@@ -56,10 +51,12 @@ def create_jira_issue(task):
 
 
 if __name__ == "__main__":
-    task = {'description': 'pranjalkar99 asked everyone to help fix a server '
-                'misconfiguration issue. This task was eventually completed.',
-        'due_date': '2025-01-20 09:53:00',
-         'priority': 'High',
-        'summary': 'Fix server misconfiguration issue'}
-    
+    task = {
+        "description": "pranjalkar99 asked everyone to help fix a server "
+        "misconfiguration issue. This task was eventually completed.",
+        "due_date": "2025-01-20 09:53:00",
+        "priority": "High",
+        "summary": "Fix server misconfiguration issue",
+    }
+
     create_jira_issue(task)

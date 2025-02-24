@@ -1,16 +1,15 @@
-import os,json
-import aiosqlite
 import asyncio
+import json
+import os
 from datetime import datetime
 from pprint import pprint
-from langchain.prompts import ChatPromptTemplate
-from langchain_openai import ChatOpenAI
-from langchain.chains import LLMChain
-from langchain.agents import initialize_agent, Tool, AgentType
+
+import aiosqlite
 from dotenv import load_dotenv
+from langchain.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_ollama.chat_models import ChatOllama
-
+from langchain_openai import ChatOpenAI
 
 from integrations.jira.utils import create_jira_issue
 
@@ -32,18 +31,20 @@ if os.environ.get("USE_LOCAL_LLM") == "True":
     else:
         ## run the private_data.sh and then set the OLLAMA_SETUP_DONE to True
 
-        raise Exception("Please run the private_data.sh script to set up the local LLM.")
+        raise Exception(
+            "Please run the private_data.sh script to set up the local LLM."
+        )
 
-        ## write code to run the bash script 
-        
+        ## write code to run the bash script
+
 
 else:
-# Initialize the language model
+    # Initialize the language model
     llm = ChatOpenAI(
-    model="gpt-4",
-    temperature=0,
-    max_tokens=1000,
-    timeout=None,
+        model="gpt-4",
+        temperature=0,
+        max_tokens=1000,
+        timeout=None,
     )
 
 template = """
@@ -81,9 +82,10 @@ prompt = ChatPromptTemplate.from_template(template)
 
 chain = prompt | llm | StrOutputParser()
 
+
 async def get_messages_in_time_range(start_date: str, end_date: str, channel_id: int):
-    start_timestamp = datetime.strptime(start_date, '%Y-%m-%d %H:%M:%S')
-    end_timestamp = datetime.strptime(end_date, '%Y-%m-%d %H:%M:%S')
+    start_timestamp = datetime.strptime(start_date, "%Y-%m-%d %H:%M:%S")
+    end_timestamp = datetime.strptime(end_date, "%Y-%m-%d %H:%M:%S")
 
     query = """
         SELECT m.content, m.timestamp, u.name
@@ -93,18 +95,17 @@ async def get_messages_in_time_range(start_date: str, end_date: str, channel_id:
     """
 
     # Fetch messages from SQLite database
-    async with aiosqlite.connect('saas_db.sqlite') as db:
+    async with aiosqlite.connect("saas_db.sqlite") as db:
         cursor = await db.cursor()
         await cursor.execute(query, (channel_id, start_timestamp, end_timestamp))
         result = await cursor.fetchall()
 
     return result
 
+
 async def main():
     messages = await get_messages_in_time_range(
-        start_date="2025-01-20 09:39:32",
-        end_date="2025-02-02 12:39:32",
-        channel_id=1
+        start_date="2025-01-20 09:39:32", end_date="2025-02-02 12:39:32", channel_id=1
     )
 
     output = chain.invoke({"messages": messages})
@@ -117,5 +118,6 @@ async def main():
     for task in actions:
         pprint(task)
         create_jira_issue(task)
+
 
 asyncio.run(main())

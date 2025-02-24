@@ -21,3 +21,6 @@ pygithub
 langgraph
 PyJWT
 cryptography
+fastapi
+uvicorn
+ruff

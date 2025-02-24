@@ -15,8 +15,8 @@
 import os
 
 import flask
-from flask.testing import FlaskClient
 import requests
+from flask.testing import FlaskClient
 
 
 def test_system(app: flask.app.Flask, client: FlaskClient) -> None:

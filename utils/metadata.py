@@ -35,7 +35,8 @@ def get_service_region() -> str:
 
 def authenticated_request(url: str, method: str) -> str:
     """Make a request with an ID token to a protected service
-    https://cloud.google.com/functions/docs/securing/authenticating#functions-bearer-token-example-python"""
+    https://cloud.google.com/functions/docs/securing/authenticating#functions-bearer-token-example-python
+    """
 
     auth_req = google.auth.transport.requests.Request()
     id_token = google.oauth2.id_token.fetch_id_token(auth_req, url)

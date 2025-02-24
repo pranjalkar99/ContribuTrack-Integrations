@@ -1,50 +1,46 @@
-import discord,os
-from discord.ext import commands
-from pprint import pprint 
-from dotenv import load_dotenv
-
 import logging
 import logging.handlers
-import psycopg2
-from psycopg2.extras import execute_values
+import os
+from pprint import pprint
 
-logger = logging.getLogger('discord')
+import discord
+from dotenv import load_dotenv
+
+logger = logging.getLogger("discord")
 logger.setLevel(logging.DEBUG)
-logging.getLogger('discord.http').setLevel(logging.INFO)
+logging.getLogger("discord.http").setLevel(logging.INFO)
 
 handler = logging.handlers.RotatingFileHandler(
-    filename='discord.log',
-    encoding='utf-8',
+    filename="discord.log",
+    encoding="utf-8",
     maxBytes=32 * 1024 * 1024,  # 32 MiB
     backupCount=5,  # Rotate through 5 files
 )
-dt_fmt = '%Y-%m-%d %H:%M:%S'
-formatter = logging.Formatter('[{asctime}] [{levelname:<8}] {name}: {message}', dt_fmt, style='{')
+dt_fmt = "%Y-%m-%d %H:%M:%S"
+formatter = logging.Formatter(
+    "[{asctime}] [{levelname:<8}] {name}: {message}", dt_fmt, style="{"
+)
 handler.setFormatter(formatter)
 logger.addHandler(handler)
 
 
 load_dotenv()
-DISCORD_API_KEY = os.environ.get('DISCORD_API_KEY')
-
-
+DISCORD_API_KEY = os.environ.get("DISCORD_API_KEY")
 
 
 class MyClient(discord.Client):
     async def on_ready(self):
-        print(f'Logged on as {self.user}!')
+        print(f"Logged on as {self.user}!")
 
     async def on_message(self, message):
         if message.author == self.user:
             return
 
-        if message.content == 'ping':
-            await message.channel.send('pong')
+        if message.content == "ping":
+            await message.channel.send("pong")
 
-        print(f'Message from {message.author}: {message.content}')
+        print(f"Message from {message.author}: {message.content}")
         pprint(message)
-
-
 
 
 intents = discord.Intents.default()

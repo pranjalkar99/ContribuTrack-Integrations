@@ -13,8 +13,8 @@
 # limitations under the License.
 
 import flask
-from flask.testing import FlaskClient
 import pytest
+from flask.testing import FlaskClient
 
 from app import app as flask_app
 
