@@ -24,6 +24,7 @@ from pydantic import BaseModel
 from starlette.status import HTTP_403_FORBIDDEN
 
 from integrations.github_integrations.get import GitHubAnalytics
+from integrations.discord.analysis.run import main as discord_analysis
 from utils.logging import logger
 
 app = FastAPI(
@@ -72,6 +73,11 @@ api_key_header = APIKeyHeader(name="x-api-key", auto_error=False)
 
 class GithubContributions_by_repo(BaseModel):
     repo_name: str
+    start_date: str
+    end_date: str
+
+class DiscordChannelAnalysis(BaseModel):
+    channel_id: str
     start_date: str
     end_date: str
 
@@ -156,6 +162,18 @@ async def github_user_activity(
     else:
         raise HTTPException(status_code=HTTP_403_FORBIDDEN, detail="Invalid API Key")
 
+
+
+@app.get("/discord_analysis", tags=["Discord"], response_model=str)
+async def discord_analysis_api(data: DiscordChannelAnalysis, api_key: str = Security(api_key_header)) -> str:
+    """
+    Returns analysis of Discord channel
+    """
+    if api_key == API_KEY:
+        logger.info("Fetching analysis of Discord channel")
+        return discord_analysis(data.channel_id, data.start_date, data.end_date)
+    else:
+        raise HTTPException(status_code=HTTP_403_FORBIDDEN, detail="Invalid API Key")
 
 def shutdown_handler(signal_int: int, frame: FrameType) -> None:
     logger.info(f"Caught Signal {signal.strsignal(signal_int)}")
