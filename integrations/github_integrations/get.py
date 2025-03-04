@@ -492,5 +492,5 @@ def test_github_analytics():
     analyzer.analyze_user_contributions(username, start_date, end_date)
 
 
-if __name__ == "__main__":
-    test_github_analytics()
+# if __name__ == "__main__":
+#     test_github_analytics()
