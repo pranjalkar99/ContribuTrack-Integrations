@@ -11,8 +11,8 @@ python-dotenv
 aiosqlite
 psycopg2 
 langchain
-langchain_community
-langchain_openai
+langchain-community
+langchain-openai
 langchain-ollama
 flake8
 black
